@@ -4,7 +4,7 @@ from tempfile import TemporaryFile
 from pathlib import Path
 
 serial_num   = '20USBHX2002885'
-directory    = Path('/opt/local/strips/ITk/tc-summary-plotting/inputs/LS154/hbi/unmerged/')
+directory    = Path('/opt/local/strips/ITk/hbi-tc-analysis/tc-summary-plotting/inputs/LS154/hbi/unmerged/')
 file_suffix  = '_RESPONSE_CURVE_PPA.json'
 name_pattern = 'SN' + serial_num + '*' + file_suffix
 
