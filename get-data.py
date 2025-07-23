@@ -15,7 +15,7 @@ def run_num_sort_key(num): # treat run numbers like floats
     primary, secondary = num.split('-') # split run number primary and secondary
     return float(f"{primary}.{secondary.zfill(3)}") # ensure 5_1 is sorted as 5.001
 
-def get_sorted_files(name_pattern):
+def get_sorted_files(directory, name_pattern):
     run_numbers = []
     for file in directory.glob(name_pattern):
         with open(file, 'r') as f:
@@ -33,8 +33,8 @@ def get_sorted_files(name_pattern):
     sorted_files = [str(directory) + '/' + f.name for f in matched_files]
     return sorted_files
 
-hbi_sorted_files = get_sorted_files(hbi_name)
-tc_sorted_files  = get_sorted_files(tc_name)
+hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name)
+tc_sorted_files  = get_sorted_files(tc_dir, tc_name)
 
 # --- Get Measurements in Order of Ascending Run Number --- #
 def get_measurements(sorted_files):
