@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 
+serial_num   = '20USBHX2002885'
+
 innse_away  = np.load('innse_away.npy')
 innse_under = np.load('innse_under.npy')
 
