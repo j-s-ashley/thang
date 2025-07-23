@@ -2,6 +2,7 @@ import json
 import numpy as np
 from pathlib import Path
 
+# --- Serial Number, Locations, and File Name Patterns --- #
 serial_num   = '20USBHX2002885'
 hbi_dir      = Path('/opt/local/strips/ITk/hbi-tc-analysis/tc-summary-plotting/inputs/LS154/hbi/unmerged/')
 hbi_file_sfx = '_RESPONSE_CURVE_PPA.json'
