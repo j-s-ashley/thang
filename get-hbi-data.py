@@ -2,9 +2,6 @@ import json
 import numpy as np
 from tempfile import TemporaryFile
 from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.cm import ScalarMappable
-from matplotlib.colors import Normalize
 
 serial_num   = '20USBHX2002885'
 directory    = Path('/opt/local/strips/ITk/tc-summary-plotting/inputs/LS154/hbi/unmerged/')
