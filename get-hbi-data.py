@@ -1,6 +1,5 @@
 import json
 import numpy as np
-from tempfile import TemporaryFile
 from pathlib import Path
 
 serial_num   = '20USBHX2002885'
@@ -50,12 +49,12 @@ for file in sorted_files:
         innse_under.append(run_innse_under)
 
 # --- Save Data --- #
-gain_a_temp  = TemporaryFile()
-gain_u_temp  = TemporaryFile()
-innse_a_temp = TemporaryFile()
-innse_u_temp = TemporaryFile()
+gain_a_np  = np.array(gain_away)
+gain_u_np  = np.array(gain_under)
+innse_a_np = np.array(innse_away)
+innse_u_np = np.array(innse_under)
 
-np.save(gain_a_temp, gain_away)
-np.save(gain_u_temp, gain_away)
-np.save(innse_a_temp, gain_away)
-np.save(innse_u_temp, gain_away)
+np.save('gain_away.npy', gain_a_np)
+np.save('gain_under.npy', gain_u_np)
+np.save('innse_away.npy', innse_a_np)
+np.save('innse_under.npy', innse_u_np)
