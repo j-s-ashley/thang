@@ -132,40 +132,41 @@ tc_warm_10pg_away, tc_warm_10pg_under, tc_warm_10pg_innse_away, tc_warm_10pg_inn
 tc_cold_3pg_away, tc_cold_3pg_under, tc_cold_3pg_innse_away, tc_cold_3pg_innse_under = get_measurements(tc_cold_3pg)
 tc_cold_10pg_away, tc_cold_10pg_under, tc_cold_10pg_innse_away, tc_cold_10pg_innse_under = get_measurements(tc_cold_10pg)
 
-# --- Save Data --- #
-def save_with_numpy(data, name):
+# --- Get Mean and Save Data --- #
+def save_mean_numpy(data, name):
     numpy_object = np.array(data)
-    np.save(name, numpy_object)
+    mean_data    = numpy_object.mean(axis=0)
+    np.save(name, mean_data)
 
 # HBI
-save_with_numpy(hbi_3pg_away, 'hbi_3pg_away.npy')
-save_with_numpy(hbi_3pg_under, 'hbi_3pg_under.npy')
-save_with_numpy(hbi_3pg_innse_away, 'hbi_3pg_innse_away.npy')
-save_with_numpy(hbi_3pg_innse_under, 'hbi_3pg_innse_under.npy')
+save_mean_numpy(hbi_3pg_away, 'hbi_3pg_away.npy')
+save_mean_numpy(hbi_3pg_under, 'hbi_3pg_under.npy')
+save_mean_numpy(hbi_3pg_innse_away, 'hbi_3pg_innse_away.npy')
+save_mean_numpy(hbi_3pg_innse_under, 'hbi_3pg_innse_under.npy')
 
-save_with_numpy(hbi_10pg_away, 'hbi_10pg_away.npy')
-save_with_numpy(hbi_10pg_under, 'hbi_10pg_under.npy')
-save_with_numpy(hbi_10pg_innse_away, 'hbi_10pg_innse_away.npy')
-save_with_numpy(hbi_10pg_innse_under, 'hbi_10pg_innse_under.npy')
+save_mean_numpy(hbi_10pg_away, 'hbi_10pg_away.npy')
+save_mean_numpy(hbi_10pg_under, 'hbi_10pg_under.npy')
+save_mean_numpy(hbi_10pg_innse_away, 'hbi_10pg_innse_away.npy')
+save_mean_numpy(hbi_10pg_innse_under, 'hbi_10pg_innse_under.npy')
 
 # TC (warm)
-save_with_numpy(tc_warm_3pg_away, 'tc_warm_3pg_away.npy')
-save_with_numpy(tc_warm_3pg_under, 'tc_warm_3pg_under.npy')
-save_with_numpy(tc_warm_3pg_innse_away, 'tc_warm_3pg_innse_away.npy')
-save_with_numpy(tc_warm_3pg_innse_under, 'tc_warm_3pg_innse_under.npy')
+save_mean_numpy(tc_warm_3pg_away, 'tc_warm_3pg_away.npy')
+save_mean_numpy(tc_warm_3pg_under, 'tc_warm_3pg_under.npy')
+save_mean_numpy(tc_warm_3pg_innse_away, 'tc_warm_3pg_innse_away.npy')
+save_mean_numpy(tc_warm_3pg_innse_under, 'tc_warm_3pg_innse_under.npy')
 
-save_with_numpy(tc_warm_10pg_away, 'tc_warm_10pg_away.npy')
-save_with_numpy(tc_warm_10pg_under, 'tc_warm_10pg_under.npy')
-save_with_numpy(tc_warm_10pg_innse_away, 'tc_warm_10pg_innse_away.npy')
-save_with_numpy(tc_warm_10pg_innse_under, 'tc_warm_10pg_innse_under.npy')
+save_mean_numpy(tc_warm_10pg_away, 'tc_warm_10pg_away.npy')
+save_mean_numpy(tc_warm_10pg_under, 'tc_warm_10pg_under.npy')
+save_mean_numpy(tc_warm_10pg_innse_away, 'tc_warm_10pg_innse_away.npy')
+save_mean_numpy(tc_warm_10pg_innse_under, 'tc_warm_10pg_innse_under.npy')
 
 # TC (cold)
-save_with_numpy(tc_cold_3pg_away, 'tc_cold_3pg_away.npy')
-save_with_numpy(tc_cold_3pg_under, 'tc_cold_3pg_under.npy')
-save_with_numpy(tc_cold_3pg_innse_away, 'tc_cold_3pg_innse_away.npy')
-save_with_numpy(tc_cold_3pg_innse_under, 'tc_cold_3pg_innse_under.npy')
+save_mean_numpy(tc_cold_3pg_away, 'tc_cold_3pg_away.npy')
+save_mean_numpy(tc_cold_3pg_under, 'tc_cold_3pg_under.npy')
+save_mean_numpy(tc_cold_3pg_innse_away, 'tc_cold_3pg_innse_away.npy')
+save_mean_numpy(tc_cold_3pg_innse_under, 'tc_cold_3pg_innse_under.npy')
 
-save_with_numpy(tc_cold_10pg_away, 'tc_cold_10pg_away.npy')
-save_with_numpy(tc_cold_10pg_under, 'tc_cold_10pg_under.npy')
-save_with_numpy(tc_cold_10pg_innse_away, 'tc_cold_10pg_innse_away.npy')
-save_with_numpy(tc_cold_10pg_innse_under, 'tc_cold_10pg_innse_under.npy')
+save_mean_numpy(tc_cold_10pg_away, 'tc_cold_10pg_away.npy')
+save_mean_numpy(tc_cold_10pg_under, 'tc_cold_10pg_under.npy')
+save_mean_numpy(tc_cold_10pg_innse_away, 'tc_cold_10pg_innse_away.npy')
+save_mean_numpy(tc_cold_10pg_innse_under, 'tc_cold_10pg_innse_under.npy')
