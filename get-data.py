@@ -25,10 +25,7 @@ def get_sorted_files(directory, name_pattern, file_suffix):
             run_number = data["runNumber"]
             run_numbers.append(run_number)
 
-    if '-' in run_numbers:
-        sorted_run_numbers = [n.replace('-','_') for n in sorted(run_numbers, key=run_num_sort_key)]
-    else:
-        sorted_run_numbers = run_numbers
+    sorted_run_numbers = [n.replace('-','_') for n in sorted(run_numbers, key=run_num_sort_key)]
  
     matched_files = []
     for num in sorted_run_numbers:
@@ -38,8 +35,14 @@ def get_sorted_files(directory, name_pattern, file_suffix):
         
     return sorted_files
 
+def get_simple_filenames(directory, file_suffix):
+    files = []
+    for file in directory.glob(f"*{file_suffix=}"):
+        files.append(file.name)
+    return files
+
 hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_file_sfx)
-tc_sorted_files  = get_sorted_files(tc_dir, tc_name, tc_file_sfx)
+tc_sorted_files  = get_simple_filenames(tc_dir, tc_file_sfx)
 
 # --- Get Measurements in Order of Ascending Run Number --- #
 def get_measurements(sorted_files):
