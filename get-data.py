@@ -35,14 +35,8 @@ def get_sorted_files(directory, name_pattern, file_suffix):
         
     return sorted_files
 
-def get_simple_filenames(directory, file_suffix):
-    files = []
-    for file in directory.glob(f"*{file_suffix}"):
-        files.append(str(directory) + '/' + file.name)
-    return files
-
 hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_file_sfx)
-tc_sorted_files  = get_simple_filenames(tc_dir, tc_file_sfx)
+tc_sorted_files  = get_sorted_files(tc_dir, tc_name, tc_file_sfx)
 
 # --- Get Measurements in Order of Ascending Run Number --- #
 def get_measurements(sorted_files):
