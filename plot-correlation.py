@@ -41,7 +41,7 @@ def plot_measurement(hbi_data, tc_data, measurement_name, stream):
 
     plt.savefig(f"{serial_num}-{measurement_name}-{stream}-correlation.pdf")
 
-plot_measurement(hbi_gain_away, tc_gain_away, 'noise', 'away')
-plot_measurement(hbi_gain_under, tc_gain_under, 'noise', 'under')
+plot_measurement(hbi_gain_away, tc_gain_away, 'gain', 'away')
+plot_measurement(hbi_gain_under, tc_gain_under, 'gain', 'under')
 plot_measurement(hbi_innse_away, tc_innse_away, 'noise', 'away')
 plot_measurement(hbi_innse_under, tc_innse_under, 'noise', 'under')
