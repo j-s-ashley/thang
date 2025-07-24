@@ -65,7 +65,7 @@ def get_sorted_files(directory, name_pattern, file_suffix):
 
 hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_file_sfx)
 tc_sorted_files  = get_sorted_files(tc_dir, tc_name, tc_file_sfx)
-
+print(tc_sorted_files)
 # --- Get Measurements in Order of Ascending Run Number --- #
 def get_measurements(sorted_files):
     gain_away   = [] 
