@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 
-serial_num   = '20USBHX2002884'
+serial_num   = '20USBHX2002884' # used for naming
 
 hbi_gain_away   = np.load('hbi_gain_away.npy')
 hbi_gain_under  = np.load('hbi_gain_under.npy')
