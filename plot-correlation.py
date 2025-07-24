@@ -16,9 +16,6 @@ tc_gain_under  = np.load('tc_gain_under.npy')
 tc_innse_away  = np.load('tc_innse_away.npy')
 tc_innse_under = np.load('tc_innse_under.npy')
 
-### DEBUG ###
-print(hbi_gain_away[0][0])
-
 def flatten_run(run):
     '''Flatten ABC lists into one list of all channels per run'''
     return [val for chip in run for val in chip]
