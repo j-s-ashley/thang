@@ -2,14 +2,42 @@ import json
 import numpy as np
 from pathlib import Path
 
-# --- Serial Number, Locations, and File Name Patterns --- #
-serial_num   = '20USBHX2002884'
+# --- Serial Numbers, Locations, and File Name Patterns --- #
+test_suffix  = '_RESPONSE_CURVE_PPA'
+
+hybrid_sn    = '20USBHX2002884'
 hbi_dir      = Path('/opt/local/strips/ITk/hbi-tc-analysis/thang/inputs/LS153/hbi/unmerged/rc/')
-hbi_file_sfx = '_RESPONSE_CURVE_PPA.json'
-hbi_name     = 'SN' + serial_num + '*' + hbi_file_sfx
+hbi_sfx      = test_suffix + '.json'
+hbi_name     = 'SN' + hybrid_sn + '*' + hbi_sfx
+
+module_sn    = '20USBML1236274'
 tc_dir       = Path('/opt/local/strips/ITk/hbi-tc-analysis/thang/inputs/LS153/tc/unmerged/rc/')
-tc_file_sfx  = '_RESPONSE_CURVE_PPA.json'
-tc_name      = 'SN' + serial_num + '*' + tc_file_sfx
+tc_sfx       = test_suffix + '.json'
+tc_name      = 'SN' + hybrid_sn + '*' + tc_sfx
+tc_merge     = '/opt/local/strips/ITk/data/20250711_LBNL_LS153_LS154_LS155_LS156/merged_results/SN20USBML1236274_20250711_3_MODULE_TC.json'
+
+# --- Get Cold/Warm TC Results File Names --- #
+def get_warm_cold_tc_runs(merge_file):
+    with open(merge_file, 'r') as mf:
+        merge_data = json.load(mf)
+        stages = merge_data["properties"]["ColdJig_History"]
+
+        warm_tc = []
+        cold_tc = []
+
+        for stage_name, stage_info in stages.items():
+            tests = stage_info.get("itsdaq_test_info", {}).get("all_tests", [])
+            if "_TC_WARM_TEST_" in stage_name:
+                warm_tc.append(tests)
+            elif "_TC_COLD_TEST_" in stage_name:
+                cold_tc.append(tests)
+
+        warm_tc_rc = [test for sublist in warm_tc for test in sublist if test_suffix in test]
+        cold_tc_rc = [test for sublist in cold_tc for test in sublist if test_suffix in test]
+
+        return warm_tc_rc, cold_tc_rc
+
+tc_warm_file_names, tc_cold_file_names = get_warm_cold_tc_runs(tc_merge)
 
 # --- Get and Order Files by Run Number --- #
 def run_num_sort_key(num): # treat run numbers like floats
@@ -29,7 +57,7 @@ def get_sorted_files(directory, name_pattern, file_suffix):
  
     matched_files = []
     for num in sorted_run_numbers:
-        matched_files.extend(directory.glob(f"SN{serial_num}*{num}{file_suffix}"))
+        matched_files.extend(directory.glob(f"SN{hybrid_sn}*{num}{file_suffix}"))
 
     sorted_files = [str(directory) + '/' + f.name for f in matched_files]
         
