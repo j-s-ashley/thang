@@ -35,10 +35,10 @@ def get_sorted_files(directory, name_pattern, file_suffix):
         
     return sorted_files
 
-def get_simple_filenames(directory, file_suffix):
+def get_simple_filename(directory, file_suffix):
     files = []
     for file in directory.glob(f"*{file_suffix}"):
-        files.append(file.name)
+        files.append(str(directory) + '/' + file.name)
     return files
 
 hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_file_sfx)
