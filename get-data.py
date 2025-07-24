@@ -99,8 +99,9 @@ def filter_by_point_gain(test_list):
             tenpg.append(test)
     return threepg, tenpg
 
-warm_3pg_tc, warm_10pg_tc = filter_by_point_gain(warm_tc_files)
-cold_3pg_tc, cold_10pg_tc = filter_by_point_gain(cold_tc_files)
+hbi_3pg, hbi_10pg         = filter_by_point_gain(hbi_sorted_files)
+tc_warm_3pg, tc_warm_10pg = filter_by_point_gain(warm_tc_files)
+tc_cold_3pg, tc_cold_10pg = filter_by_point_gain(cold_tc_files)
 
 # --- Get Measurements in Order of Ascending Run Number --- #
 def get_measurements(sorted_files):
@@ -124,30 +125,47 @@ def get_measurements(sorted_files):
 
     return gain_away, gain_under, innse_away, innse_under
 
-hbi_gain_away, hbi_gain_under, hbi_innse_away, hbi_innse_under = get_measurements(hbi_sorted_files)
-tc_gain_away, tc_gain_under, tc_innse_away, tc_innse_under = get_measurements(tc_sorted_files)
+hbi_3pg_away, hbi_3pg_under, hbi_3pg_innse_away, hbi_3pg_innse_under = get_measurements(hbi_3pg)
+hbi_10pg_away, hbi_10pg_under, hbi_10pg_innse_away, hbi_10pg_innse_under = get_measurements(hbi_10pg)
+tc_warm_3pg_away, tc_warm_3pg_under, tc_warm_3pg_innse_away, tc_warm_3pg_innse_under = get_measurements(tc_warm_3pg)
+tc_warm_10pg_away, tc_warm_10pg_under, tc_warm_10pg_innse_away, tc_warm_10pg_innse_under = get_measurements(tc_warm_10pg)
+tc_cold_3pg_away, tc_cold_3pg_under, tc_cold_3pg_innse_away, tc_cold_3pg_innse_under = get_measurements(tc_cold_3pg)
+tc_cold_10pg_away, tc_cold_10pg_under, tc_cold_10pg_innse_away, tc_cold_10pg_innse_under = get_measurements(tc_cold_10pg)
 
 # --- Save Data --- #
 def save_with_numpy(data, name):
     numpy_object = np.array(data)
     np.save(name, numpy_object)
 
-save_with_numpy(hbi_gain_away)
-hbi_gain_u_np  = np.array(hbi_gain_under)
-hbi_innse_a_np = np.array(hbi_innse_away)
-hbi_innse_u_np = np.array(hbi_innse_under)
+# HBI
+save_with_numpy(hbi_3pg_away)
+save_with_numpy(hbi_3pg_under)
+save_with_numpy(hbi_3pg_innse_away)
+save_with_numpy(hbi_3pg_innse_under)
 
-tc_gain_a_np  = np.array(tc_gain_away)
-tc_gain_u_np  = np.array(tc_gain_under)
-tc_innse_a_np = np.array(tc_innse_away)
-tc_innse_u_np = np.array(tc_innse_under)
+save_with_numpy(hbi_10pg_away)
+save_with_numpy(hbi_10pg_under)
+save_with_numpy(hbi_10pg_innse_away)
+save_with_numpy(hbi_10pg_innse_under)
 
-np.save('hbi_gain_away.npy', hbi_gain_a_np)
-np.save('hbi_gain_under.npy', hbi_gain_u_np)
-np.save('hbi_innse_away.npy', hbi_innse_a_np)
-np.save('hbi_innse_under.npy', hbi_innse_u_np)
+# TC (warm)
+save_with_numpy(tc_warm_3pg_away)
+save_with_numpy(tc_warm_3pg_under)
+save_with_numpy(tc_warm_3pg_innse_away)
+save_with_numpy(tc_warm_3pg_innse_under)
 
-np.save('tc_gain_away.npy', tc_gain_a_np)
-np.save('tc_gain_under.npy', tc_gain_u_np)
-np.save('tc_innse_away.npy', tc_innse_a_np)
-np.save('tc_innse_under.npy', tc_innse_u_np)
+save_with_numpy(tc_warm_10pg_away)
+save_with_numpy(tc_warm_10pg_under)
+save_with_numpy(tc_warm_10pg_innse_away)
+save_with_numpy(tc_warm_10pg_innse_under)
+
+# TC (cold)
+save_with_numpy(tc_cold_3pg_away)
+save_with_numpy(tc_cold_3pg_under)
+save_with_numpy(tc_cold_3pg_innse_away)
+save_with_numpy(tc_cold_3pg_innse_under)
+
+save_with_numpy(tc_cold_10pg_away)
+save_with_numpy(tc_cold_10pg_under)
+save_with_numpy(tc_cold_10pg_innse_away)
+save_with_numpy(tc_cold_10pg_innse_under)
