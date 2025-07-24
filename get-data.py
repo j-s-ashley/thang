@@ -8,7 +8,7 @@ hbi_dir      = Path('/opt/local/strips/ITk/hbi-tc-analysis/thang/inputs/LS153/hb
 hbi_file_sfx = '_RESPONSE_CURVE_PPA.json'
 hbi_name     = 'SN' + serial_num + '*' + hbi_file_sfx
 tc_dir       = Path('/opt/local/strips/ITk/hbi-tc-analysis/thang/inputs/LS153/tc/unmerged/rc/')
-tc_file_sfx  = '_RESPONSE_CURVE_TC.json'
+tc_file_sfx  = '_RESPONSE_CURVE_PPA.json'
 tc_name      = 'SN' + serial_num + '*' + tc_file_sfx
 
 # --- Get and Order Files by Run Number --- #
