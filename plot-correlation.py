@@ -28,32 +28,24 @@ tc_cold_10pg_under   = np.load('tc_cold_10pg_under.npy')
 tc_cold_3pg_innse_away  = np.load('tc_cold_3pg_innse_away.npy')
 tc_cold_10pg_innse_under = np.load('tc_cold_10pg_innse_under.npy')
 
-def flatten_run(run):
-    '''Flatten ABC lists into one list of all channels per run'''
-    return [val for chip in run for val in chip]
-
-def plot_measurement(hbi_data, tc_data, measurement_name, stream):
+def plot_measurement(x_data, y_data, measurement_name, stream, x_ID, y_ID):
     plt.figure()
-    num_runs = len(hbi_data)
+    num_runs = len(x_data)
     norm     = Normalize(vmin=0, vmax=num_runs - 1)
     cmap     = plt.get_cmap("Greens")
     
     plt.figure(figsize=(10, 5))
 
-    for run_num, (hbi_run, tc_run) in enumerate(zip(hbi_data, tc_data)):
-        hbi_flat = flatten_run(hbi_run)
-        tc_flat  = flatten_run(tc_run)
-        color    = cmap(norm(run_num))
-        plt.scatter(hbi_flat, tc_flat, color=color, label=f"Run {run_num}", s=10)
+    plt.scatter(x_data, y_data)
 
-    plt.title(f"{serial_num} {measurement_name}, {stream} Stream HBI vs TC Correlation")
-    plt.xlabel(f"HBI {measurement_name}")
-    plt.ylabel(f"TC {measurement_name}")
+    plt.title(f"{serial_num} {measurement_name}, {stream} stream, {x_ID} vs {y_ID}")
+    plt.xlabel(f"{x_ID} {measurement_name}")
+    plt.ylabel(f"{y_ID} {measurement_name}")
     plt.grid()
 
-    plt.savefig(f"{serial_num}-{measurement_name}-{stream}-correlation.pdf")
+    plt.savefig(f"{serial_num}-{measurement_name}-{stream}-{x_ID}-vs-{y_ID}.pdf")
 
-plot_measurement(hbi_gain_away, tc_gain_away, 'gain', 'away')
-plot_measurement(hbi_gain_under, tc_gain_under, 'gain', 'under')
-plot_measurement(hbi_innse_away, tc_innse_away, 'noise', 'away')
-plot_measurement(hbi_innse_under, tc_innse_under, 'noise', 'under')
+plot_measurement(hbi_3pg_away, tc_warm_3pg_away, '3PG', 'away', 'HBI', 'Warm TC')
+plot_measurement(hbi_3pg_under, tc_warm_3pg_under, '3PG', 'under', 'HBI', 'Warm TC')
+plot_measurement(hbi_3pg_innse_away, tc_warm_3pg_innse_away, 'noise', 'away', 'HBI', 'Warm TC')
+plot_measurement(hbi_3pg_innse_under, tc_warm_3pg_innse_under, 'noise', 'under', 'HBI', 'Warm TC')
