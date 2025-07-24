@@ -25,13 +25,16 @@ def get_sorted_files(directory, name_pattern, file_suffix):
             run_number = data["runNumber"]
             run_numbers.append(run_number)
 
-    sorted_run_numbers = [n.replace('-','_') for n in sorted(run_numbers, key=run_num_sort_key)]
+    if '-' in run_numbers:
+        sorted_run_numbers = [n.replace('-','_') for n in sorted(run_numbers, key=run_num_sort_key)]
 
-    matched_files = []
-    for num in sorted_run_numbers:
-        matched_files.extend(directory.glob(f"SN{serial_num}*{num}{file_suffix}"))
+        matched_files = []
+        for num in sorted_run_numbers:
+            matched_files.extend(directory.glob(f"SN{serial_num}*{num}{file_suffix}"))
 
-    sorted_files = [str(directory) + '/' + f.name for f in matched_files]
+        sorted_files = [str(directory) + '/' + f.name for f in matched_files]
+    else:
+        sorted_files = str(directory) + '/' + directory.glob(name_pattern).name
     return sorted_files
 
 hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_file_sfx)
