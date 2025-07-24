@@ -89,14 +89,14 @@ def get_test_type(rc_file):
             test_type = "10PG"
         return test_type
 
-def filter_by_point_gain(tc_list):
+def filter_by_point_gain(test_list):
     threepg = []
     tenpg   = []
-    for tc in tc_list:
-        if get_test_type(tc) == "3PG":
-            threepg.append(tc)
+    for test in test_list:
+        if get_test_type(test) == "3PG":
+            threepg.append(test)
         else:
-            tenpg.append(tc)
+            tenpg.append(test)
     return threepg, tenpg
 
 warm_3pg_tc, warm_10pg_tc = filter_by_point_gain(warm_tc_files)
