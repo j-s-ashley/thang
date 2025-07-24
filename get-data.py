@@ -35,7 +35,10 @@ def get_warm_cold_tc_runs(merge_file):
         warm_tc_rc = [test for sublist in warm_tc for test in sublist if test_suffix in test]
         cold_tc_rc = [test for sublist in cold_tc for test in sublist if test_suffix in test]
 
-        return warm_tc_rc, cold_tc_rc
+        w_tc_rc_formatted = [name.replace('-','_') for name in warm_tc_rc]
+        c_tc_rc_formatted = [name.replace('-','_') for name in cold_tc_rc]
+
+        return w_tc_rc_formatted, c_tc_rc_formatted
 
 tc_warm_file_names, tc_cold_file_names = get_warm_cold_tc_runs(tc_merge)
 
