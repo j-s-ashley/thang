@@ -3,11 +3,11 @@ import numpy as np
 from pathlib import Path
 
 # --- Serial Number, Locations, and File Name Patterns --- #
-serial_num   = '20USBHX2002885'
-hbi_dir      = Path('/opt/local/strips/ITk/hbi-tc-analysis/tc-summary-plotting/inputs/LS154/hbi/unmerged/')
+serial_num   = '20USBHX2002884'
+hbi_dir      = Path('/opt/local/strips/ITk/hbi-tc-analysis/tc-summary-plotting/inputs/LS153/hbi/unmerged/')
 hbi_file_sfx = '_RESPONSE_CURVE_PPA.json'
 hbi_name     = 'SN' + serial_num + '*' + hbi_file_sfx
-tc_dir       = Path('/opt/local/strips/ITk/hbi-tc-analysis/tc-summary-plotting/inputs/LS154/tc/')
+tc_dir       = Path('/opt/local/strips/ITk/hbi-tc-analysis/tc-summary-plotting/inputs/LS153/tc/')
 tc_file_sfx  = '_RESPONSE_CURVE_TC.json'
 tc_name      = 'SN' + serial_num + '*' + tc_file_sfx
 
