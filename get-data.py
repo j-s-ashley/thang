@@ -37,7 +37,7 @@ def get_sorted_files(directory, name_pattern, file_suffix):
 
 def get_simple_filenames(directory, file_suffix):
     files = []
-    for file in directory.glob(f"*{file_suffix=}"):
+    for file in directory.glob(f"*{file_suffix}"):
         files.append(file.name)
     return files
 
