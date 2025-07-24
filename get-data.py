@@ -69,9 +69,38 @@ def get_sorted_files(directory, name_pattern, file_suffix):
 hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_sfx)
 tc_sorted_files  = get_sorted_files(tc_dir, tc_name, tc_sfx)
 
-# Filter TC files into warm and cold based on file name
+# --- Sort TC Files into Types --- #
+# Filter into warm and cold based on file name
 warm_tc_files    = [file for file in tc_sorted_files if any(warm in file for warm in tc_warm_file_names)]
 cold_tc_files    = [file for file in tc_sorted_files if any(cold in file for cold in tc_cold_file_names)]
+
+# Filter into 3-point and 10-point gain
+def get_test_type(rc_file):
+    '''
+    Adapted from Madison Levagood's beautiful work
+    https://github.com/mlevagood/tc-summary-plotting/blob/master/common_functions.py#L274
+    '''
+    with open(rc_file, 'r') as rcf:
+        rc_data = json.load(rcf)        
+        ft_code = rc_data["properties"]["fit_type_code"]
+        if ft_code == 4:
+            test_type = "3PG"
+        elif ft_code == 3:
+            test_type = "10PG"
+        return test_type
+
+def filter_by_point_gain(tc_list):
+    threepg = []
+    tenpg   = []
+    for tc in tc_list:
+        if get_test_type(tc) == "3PG":
+            threepg.append(tc)
+        else:
+            tenpg.append(tc)
+    return threepg, tenpg
+
+warm_3pg_tc, warm_10pg_tc = filter_by_point_gain(warm_tc_files)
+cold_3pg_tc, cold_10pg_tc = filter_by_point_gain(cold_tc_files)
 
 # --- Get Measurements in Order of Ascending Run Number --- #
 def get_measurements(sorted_files):
@@ -99,7 +128,11 @@ hbi_gain_away, hbi_gain_under, hbi_innse_away, hbi_innse_under = get_measurement
 tc_gain_away, tc_gain_under, tc_innse_away, tc_innse_under = get_measurements(tc_sorted_files)
 
 # --- Save Data --- #
-hbi_gain_a_np  = np.array(hbi_gain_away)
+def save_with_numpy(data, name):
+    numpy_object = np.array(data)
+    np.save(name, numpy_object)
+
+save_with_numpy(hbi_gain_away)
 hbi_gain_u_np  = np.array(hbi_gain_under)
 hbi_innse_a_np = np.array(hbi_innse_away)
 hbi_innse_u_np = np.array(hbi_innse_under)
