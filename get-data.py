@@ -68,7 +68,11 @@ def get_sorted_files(directory, name_pattern, file_suffix):
 
 hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_sfx)
 tc_sorted_files  = get_sorted_files(tc_dir, tc_name, tc_sfx)
-print(tc_sorted_files)
+
+# Filter TC files into warm and cold based on file name
+warm_tc_files    = [file for file in tc_sorted_files if any(warm in file for warm in tc_warm_file_names)]
+cold_tc_files    = [file for file in tc_sorted_files if any(cold in file for cold in tc_cold_file_names)]
+
 # --- Get Measurements in Order of Ascending Run Number --- #
 def get_measurements(sorted_files):
     gain_away   = [] 
