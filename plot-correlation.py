@@ -6,15 +6,27 @@ from matplotlib.colors import Normalize
 
 serial_num   = '20USBHX2002884' # used for naming
 
-hbi_gain_away   = np.load('hbi_gain_away.npy')
-hbi_gain_under  = np.load('hbi_gain_under.npy')
-hbi_innse_away  = np.load('hbi_innse_away.npy')
-hbi_innse_under = np.load('hbi_innse_under.npy')
+# --- Load Data --- #
+hbi_3pg_away   = np.load('hbi_3pg_away.npy')
+hbi_10pg_away   = np.load('hbi_10pg_away.npy')
+hbi_3pg_under   = np.load('hbi_3pg_under.npy')
+hbi_10pg_under   = np.load('hbi_10pg_under.npy')
+hbi_3pg_innse_away  = np.load('hbi_3pg_innse_away.npy')
+hbi_10pg_innse_under = np.load('hbi_10pg_innse_under.npy')
 
-tc_gain_away   = np.load('tc_gain_away.npy')
-tc_gain_under  = np.load('tc_gain_under.npy')
-tc_innse_away  = np.load('tc_innse_away.npy')
-tc_innse_under = np.load('tc_innse_under.npy')
+tc_warm_3pg_away   = np.load('tc_warm_3pg_away.npy')
+tc_warm_10pg_away   = np.load('tc_warm_10pg_away.npy')
+tc_warm_3pg_under   = np.load('tc_warm_3pg_under.npy')
+tc_warm_10pg_under   = np.load('tc_warm_10pg_under.npy')
+tc_warm_3pg_innse_away  = np.load('tc_warm_3pg_innse_away.npy')
+tc_warm_10pg_innse_under = np.load('tc_warm_10pg_innse_under.npy')
+
+tc_cold_3pg_away   = np.load('tc_cold_3pg_away.npy')
+tc_cold_10pg_away   = np.load('tc_cold_10pg_away.npy')
+tc_cold_3pg_under   = np.load('tc_cold_3pg_under.npy')
+tc_cold_10pg_under   = np.load('tc_cold_10pg_under.npy')
+tc_cold_3pg_innse_away  = np.load('tc_cold_3pg_innse_away.npy')
+tc_cold_10pg_innse_under = np.load('tc_cold_10pg_innse_under.npy')
 
 def flatten_run(run):
     '''Flatten ABC lists into one list of all channels per run'''
