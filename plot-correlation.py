@@ -35,14 +35,12 @@ tc_cold_3pg_innse_under  = np.load('tc_cold_3pg_innse_under.npy')
 tc_cold_10pg_innse_under = np.load('tc_cold_10pg_innse_under.npy')
 
 def plot_measurement(x_data, y_data, measurement_name, stream, x_ID, y_ID):
-    plt.figure()
-    num_runs = len(x_data)
-    norm     = Normalize(vmin=0, vmax=num_runs - 1)
-    cmap     = plt.get_cmap("Greens")
+    channel_labels = np.repeat(np.arange(10), 10)
+    cmap           = plt.cm.get_cmap("viridis")
     
     plt.figure(figsize=(10, 5))
 
-    plt.scatter(x_data, y_data)
+    plt.scatter(x_data, y_data, c=channel_labels, cmap=cmap)
 
     plt.title(f"{serial_num} {measurement_name}, {stream} stream, {x_ID} vs {y_ID}")
     plt.xlabel(f"{x_ID} {measurement_name}")
