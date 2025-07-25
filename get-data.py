@@ -11,7 +11,7 @@ hbi_sfx      = test_suffix + '.json'
 hbi_name     = 'SN' + hybrid_sn + '*' + hbi_sfx
 
 module_sn    = '20USBML1236274'
-tc_dir       = Path('/opt/local/strips/ITk/hbi-tc-analysis/thang/inputs/LS153/tc/unmerged/rc/')
+tc_dir       = Path('/opt/local/strips/ITk/hbi-tc-analysis/thang/inputs/LS153/tc/pre-deionization/unmerged/rc/')
 tc_sfx       = test_suffix + '.json'
 tc_name      = 'SN' + hybrid_sn + '*' + tc_sfx
 tc_merge     = '/opt/local/strips/ITk/data/20250711_LBNL_LS153_LS154_LS155_LS156/merged_results/SN20USBML1236274_20250711_3_MODULE_TC.json'
