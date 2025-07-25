@@ -35,7 +35,7 @@ tc_cold_3pg_innse_under  = np.load('tc_cold_3pg_innse_under.npy')
 tc_cold_10pg_innse_under = np.load('tc_cold_10pg_innse_under.npy')
 
 def plot_measurement(x_data, y_data, measurement_name, stream, x_ID, y_ID):
-    channel_labels = np.repeat(np.arange(10), 10)
+    channel_labels = np.repeat(np.arange(10), 128)
     cmap           = plt.cm.get_cmap("viridis")
     
     plt.figure(figsize=(10, 5))
