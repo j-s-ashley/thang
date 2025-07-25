@@ -40,7 +40,7 @@ def plot_measurement(x_data, y_data, measurement_name, stream, x_ID, y_ID):
     
     plt.figure(figsize=(10, 5))
 
-    plt.scatter(x_data, y_data, c=channel_labels, cmap=cmap)
+    scatter = plt.scatter(x_data, y_data, c=channel_labels, cmap=cmap)
     
     cbar = plt.colorbar(scatter, ticks=range(10))
     cbar.set_label('ABC')
