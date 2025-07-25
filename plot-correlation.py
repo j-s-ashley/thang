@@ -36,12 +36,16 @@ tc_cold_10pg_innse_under = np.load('tc_cold_10pg_innse_under.npy')
 
 def plot_measurement(x_data, y_data, measurement_name, stream, x_ID, y_ID):
     channel_labels = np.repeat(np.arange(10), 128)
-    cmap           = plt.cm.get_cmap("viridis")
+    cmap           = plt.cm.get_cmap("tab10")
     
     plt.figure(figsize=(10, 5))
 
     plt.scatter(x_data, y_data, c=channel_labels, cmap=cmap)
-
+    
+    cbar = plt.colorbar(scatter, ticks=range(10))
+    cbar.set_label('ABC')
+    cbar.set_ticklabels([f'ABC {i}' for i in range(10)])
+    
     plt.title(f"{serial_num} {measurement_name}, {stream} stream, {x_ID} vs {y_ID}")
     plt.xlabel(f"{x_ID} {measurement_name}")
     plt.ylabel(f"{y_ID} {measurement_name}")
