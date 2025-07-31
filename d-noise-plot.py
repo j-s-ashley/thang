@@ -15,7 +15,7 @@ def plot_measurement(all_data, stream, y_ID):
     
     colors = plt.cm.get_cmap("tab10", len(all_data))
     for idx, (serial_num, y_data) in enumerate(all_data.items()):
-        plt.plot(x_data, y_data, label=serial_num, color=colors(idx), marker='o')
+        plt.scatter(x_data, y_data, label=serial_num, color=cmap(idx))
     
     plt.title(f"{measurement_name} {y_ID}, {stream} stream")
     plt.xlabel(f"{x_ID}")
