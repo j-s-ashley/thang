@@ -24,7 +24,7 @@ def plot_measurement(all_data, stream, y_ID):
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
     
-    plt.savefig(f"{serial_num}-{measurement_name}-{stream}-{y_ID}.pdf")
+    plt.savefig(f"all-{measurement_name}-{stream}-{y_ID}.pdf")
     plt.close()
 
 # --- Plot for Each Serial Number --- #
