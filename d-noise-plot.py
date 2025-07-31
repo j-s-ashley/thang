@@ -41,7 +41,7 @@ def plot_measurement(y_data, stream, y_ID):
     
     plt.figure(figsize=(10, 5))
     
-    x_data  = np.arrange(len(diff_data)) # Should come out to 1280
+    x_data  = np.arange(len(diff_data)) # Should come out to 1280
     x_ID    = 'channel'
     measurement_name = 'TC_HBI_difference'
     scatter = plt.scatter(x_data, y_data, c=channel_labels, cmap=cmap)
