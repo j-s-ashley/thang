@@ -1,16 +1,16 @@
-{
-	"LS153": {
-		"module-sn": "20USBML1236274",
-		"hybrid-sn": "20USBHX2002884",
-		"hbi_dir": "inputs/LS153/hbi",
-		"tc_dir": "inputs/LS153/tc/post-deionization",
-		"tc_merge": "/opt/local/strips/ITk/data/20250718_LBNL_PS_LS153_LS160_LS161_LS162/merged_results/SN20USBML1236274_20250711_3_MODULE_TC.json"
-		},
-	"LS154": {
-		"module-sn": "20USBML1236275",
-		"hybrid-sn": "20USBHX2002885",
-		"hbi_dir": "inputs/LS154/hbi",
-		"tc_dir": "inputs/LS154/tc",
-		"tc_merge": "/opt/local/strips/ITk/data/20250711_LBNL_LS153_LS154_LS155_LS156/merged_results/SN20USBML1236275_20250711_3_MODULE_TC.json"
-		}
-}
+[
+        {
+        "module_sn": "20USBML1236274",
+        "hybrid_sn": "20USBHX2002884",
+        "hbi_dir": "inputs/LS153/hbi",
+        "tc_dir": "inputs/LS153/tc/post-deionization",
+        "tc_merge": "/opt/local/strips/ITk/data/20250718_LBNL_PS_LS153_LS160_LS161_LS162/merged_results/SN20USBML1236274_20250718_5_MODULE_TC.json"
+        },
+        {
+        "module_sn": "20USBML1236275",
+        "hybrid_sn": "20USBHX2002885",
+        "hbi_dir": "inputs/LS154/hbi",
+        "tc_dir": "inputs/LS154/tc",
+        "tc_merge": "/opt/local/strips/ITk/data/20250711_LBNL_LS153_LS154_LS155_LS156/merged_results/SN20USBML1236275_20250711_3_MODULE_TC.json"
+        }
+]
