@@ -119,6 +119,8 @@ with open("input-config.json") as i_c:
         tc_dir    = Path(module["tc_dir"])
         tc_merge  = module["tc_merge"]
 
+        print(f"Acquiring data for {module["module_ID"]}")
+
         tc_name      = 'SN' + hybrid_sn + '*' + tc_sfx
         hbi_name     = 'SN' + hybrid_sn + '*' + hbi_sfx
 
