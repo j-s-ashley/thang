@@ -2,19 +2,9 @@ import json
 import numpy as np
 from pathlib import Path
 
-# --- Serial Numbers, Locations, and File Name Patterns --- #
 test_suffix  = '_RESPONSE_CURVE_PPA'
-
-hybrid_sn    = '20USBHX2002884'
-hbi_dir      = Path('/opt/local/strips/ITk/hbi-tc-analysis/thang/inputs/LS153/hbi/unmerged/rc/')
-hbi_sfx      = test_suffix + '.json'
-hbi_name     = 'SN' + hybrid_sn + '*' + hbi_sfx
-
-module_sn    = '20USBML1236274'
-tc_dir       = Path('/opt/local/strips/ITk/hbi-tc-analysis/thang/inputs/LS153/tc/pre-deionization/unmerged/rc/')
 tc_sfx       = test_suffix + '.json'
-tc_name      = 'SN' + hybrid_sn + '*' + tc_sfx
-tc_merge     = '/opt/local/strips/ITk/data/20250711_LBNL_LS153_LS154_LS155_LS156/merged_results/SN20USBML1236274_20250711_3_MODULE_TC.json'
+hbi_sfx      = test_suffix + '.json'
 
 # --- Get Cold/Warm TC Results File Names --- #
 def get_warm_cold_tc_runs(merge_file):
@@ -40,8 +30,6 @@ def get_warm_cold_tc_runs(merge_file):
 
         return w_tc_rc_formatted, c_tc_rc_formatted
 
-tc_warm_file_names, tc_cold_file_names = get_warm_cold_tc_runs(tc_merge)
-
 # --- Get and Order Files by Run Number --- #
 def run_num_sort_key(num): # treat run numbers like floats
     primary, secondary = num.split('-') # split run number primary and secondary
@@ -66,14 +54,7 @@ def get_sorted_files(directory, name_pattern, file_suffix):
         
     return sorted_files
 
-hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_sfx)
-tc_sorted_files  = get_sorted_files(tc_dir, tc_name, tc_sfx)
-
 # --- Sort TC Files into Types --- #
-# Filter into warm and cold based on file name
-warm_tc_files    = [file for file in tc_sorted_files if any(warm in file for warm in tc_warm_file_names)]
-cold_tc_files    = [file for file in tc_sorted_files if any(cold in file for cold in tc_cold_file_names)]
-
 # Filter into 3-point and 10-point gain
 def get_test_type(rc_file):
     '''
@@ -99,10 +80,6 @@ def filter_by_point_gain(test_list):
             tenpg.append(test)
     return threepg, tenpg
 
-hbi_3pg, hbi_10pg         = filter_by_point_gain(hbi_sorted_files)
-tc_warm_3pg, tc_warm_10pg = filter_by_point_gain(warm_tc_files)
-tc_cold_3pg, tc_cold_10pg = filter_by_point_gain(cold_tc_files)
-
 # --- Get Measurements in Order of Ascending Run Number --- #
 def get_measurements(sorted_files):
     gain_away   = [] 
@@ -125,48 +102,76 @@ def get_measurements(sorted_files):
 
     return gain_away, gain_under, innse_away, innse_under
 
-hbi_3pg_away, hbi_3pg_under, hbi_3pg_innse_away, hbi_3pg_innse_under = get_measurements(hbi_3pg)
-hbi_10pg_away, hbi_10pg_under, hbi_10pg_innse_away, hbi_10pg_innse_under = get_measurements(hbi_10pg)
-tc_warm_3pg_away, tc_warm_3pg_under, tc_warm_3pg_innse_away, tc_warm_3pg_innse_under = get_measurements(tc_warm_3pg)
-tc_warm_10pg_away, tc_warm_10pg_under, tc_warm_10pg_innse_away, tc_warm_10pg_innse_under = get_measurements(tc_warm_10pg)
-tc_cold_3pg_away, tc_cold_3pg_under, tc_cold_3pg_innse_away, tc_cold_3pg_innse_under = get_measurements(tc_cold_3pg)
-tc_cold_10pg_away, tc_cold_10pg_under, tc_cold_10pg_innse_away, tc_cold_10pg_innse_under = get_measurements(tc_cold_10pg)
-
 # --- Get Mean and Save Data --- #
 def save_mean_numpy(data, name):
     numpy_object = np.array(data)
     mean_data    = numpy_object.mean(axis=0)
     np.save(name, mean_data)
 
-# HBI
-save_mean_numpy(hbi_3pg_away, 'hbi_3pg_away.npy')
-save_mean_numpy(hbi_3pg_under, 'hbi_3pg_under.npy')
-save_mean_numpy(hbi_3pg_innse_away, 'hbi_3pg_innse_away.npy')
-save_mean_numpy(hbi_3pg_innse_under, 'hbi_3pg_innse_under.npy')
+# --- Open Input JSON, Loop Over Modules--- #
+with open("input-config.json") as i_c:
+    input_config = json.load(i_c)
+    for module in input_config:
+        module_sn = module["module_sn"]
+        hybrid_sn = module["hybrid_sn"]
+        hbi_dir   = module["hbi_dir"]
+        tc_dir    = module["tc_dir"]
+        tc_merge  = module["tc_merge"]
 
-save_mean_numpy(hbi_10pg_away, 'hbi_10pg_away.npy')
-save_mean_numpy(hbi_10pg_under, 'hbi_10pg_under.npy')
-save_mean_numpy(hbi_10pg_innse_away, 'hbi_10pg_innse_away.npy')
-save_mean_numpy(hbi_10pg_innse_under, 'hbi_10pg_innse_under.npy')
+        tc_name      = 'SN' + hybrid_sn + '*' + tc_sfx
+        hbi_name     = 'SN' + hybrid_sn + '*' + hbi_sfx
 
-# TC (warm)
-save_mean_numpy(tc_warm_3pg_away, 'tc_warm_3pg_away.npy')
-save_mean_numpy(tc_warm_3pg_under, 'tc_warm_3pg_under.npy')
-save_mean_numpy(tc_warm_3pg_innse_away, 'tc_warm_3pg_innse_away.npy')
-save_mean_numpy(tc_warm_3pg_innse_under, 'tc_warm_3pg_innse_under.npy')
+        tc_warm_file_names, tc_cold_file_names = get_warm_cold_tc_runs(tc_merge)
 
-save_mean_numpy(tc_warm_10pg_away, 'tc_warm_10pg_away.npy')
-save_mean_numpy(tc_warm_10pg_under, 'tc_warm_10pg_under.npy')
-save_mean_numpy(tc_warm_10pg_innse_away, 'tc_warm_10pg_innse_away.npy')
-save_mean_numpy(tc_warm_10pg_innse_under, 'tc_warm_10pg_innse_under.npy')
+        hbi_sorted_files = get_sorted_files(hbi_dir, hbi_name, hbi_sfx)
+        tc_sorted_files  = get_sorted_files(tc_dir, tc_name, tc_sfx)
 
-# TC (cold)
-save_mean_numpy(tc_cold_3pg_away, 'tc_cold_3pg_away.npy')
-save_mean_numpy(tc_cold_3pg_under, 'tc_cold_3pg_under.npy')
-save_mean_numpy(tc_cold_3pg_innse_away, 'tc_cold_3pg_innse_away.npy')
-save_mean_numpy(tc_cold_3pg_innse_under, 'tc_cold_3pg_innse_under.npy')
+        # Filter into warm and cold based on file name
+        warm_tc_files    = [file for file in tc_sorted_files if any(warm in file for warm in tc_warm_file_names)]
+        cold_tc_files    = [file for file in tc_sorted_files if any(cold in file for cold in tc_cold_file_names)]
 
-save_mean_numpy(tc_cold_10pg_away, 'tc_cold_10pg_away.npy')
-save_mean_numpy(tc_cold_10pg_under, 'tc_cold_10pg_under.npy')
-save_mean_numpy(tc_cold_10pg_innse_away, 'tc_cold_10pg_innse_away.npy')
-save_mean_numpy(tc_cold_10pg_innse_under, 'tc_cold_10pg_innse_under.npy')
+        # Filter into 3 and 10 point gain based on test code
+        hbi_3pg, hbi_10pg         = filter_by_point_gain(hbi_sorted_files)
+        tc_warm_3pg, tc_warm_10pg = filter_by_point_gain(warm_tc_files)
+        tc_cold_3pg, tc_cold_10pg = filter_by_point_gain(cold_tc_files)
+
+        # Get test data for each measurement type and stream
+        hbi_3pg_away, hbi_3pg_under, hbi_3pg_innse_away, hbi_3pg_innse_under = get_measurements(hbi_3pg)
+        hbi_10pg_away, hbi_10pg_under, hbi_10pg_innse_away, hbi_10pg_innse_under = get_measurements(hbi_10pg)
+        tc_warm_3pg_away, tc_warm_3pg_under, tc_warm_3pg_innse_away, tc_warm_3pg_innse_under = get_measurements(tc_warm_3pg)
+        tc_warm_10pg_away, tc_warm_10pg_under, tc_warm_10pg_innse_away, tc_warm_10pg_innse_under = get_measurements(tc_warm_10pg)
+        tc_cold_3pg_away, tc_cold_3pg_under, tc_cold_3pg_innse_away, tc_cold_3pg_innse_under = get_measurements(tc_cold_3pg)
+        tc_cold_10pg_away, tc_cold_10pg_under, tc_cold_10pg_innse_away, tc_cold_10pg_innse_under = get_measurements(tc_cold_10pg)
+
+        # Save HBI means
+        save_mean_numpy(hbi_3pg_away, 'hbi_3pg_away.npy')
+        save_mean_numpy(hbi_3pg_under, 'hbi_3pg_under.npy')
+        save_mean_numpy(hbi_3pg_innse_away, 'hbi_3pg_innse_away.npy')
+        save_mean_numpy(hbi_3pg_innse_under, 'hbi_3pg_innse_under.npy')
+
+        save_mean_numpy(hbi_10pg_away, 'hbi_10pg_away.npy')
+        save_mean_numpy(hbi_10pg_under, 'hbi_10pg_under.npy')
+        save_mean_numpy(hbi_10pg_innse_away, 'hbi_10pg_innse_away.npy')
+        save_mean_numpy(hbi_10pg_innse_under, 'hbi_10pg_innse_under.npy')
+
+        # Save TC (warm) means
+        save_mean_numpy(tc_warm_3pg_away, 'tc_warm_3pg_away.npy')
+        save_mean_numpy(tc_warm_3pg_under, 'tc_warm_3pg_under.npy')
+        save_mean_numpy(tc_warm_3pg_innse_away, 'tc_warm_3pg_innse_away.npy')
+        save_mean_numpy(tc_warm_3pg_innse_under, 'tc_warm_3pg_innse_under.npy')
+
+        save_mean_numpy(tc_warm_10pg_away, 'tc_warm_10pg_away.npy')
+        save_mean_numpy(tc_warm_10pg_under, 'tc_warm_10pg_under.npy')
+        save_mean_numpy(tc_warm_10pg_innse_away, 'tc_warm_10pg_innse_away.npy')
+        save_mean_numpy(tc_warm_10pg_innse_under, 'tc_warm_10pg_innse_under.npy')
+
+        # Save TC (cold) means
+        save_mean_numpy(tc_cold_3pg_away, 'tc_cold_3pg_away.npy')
+        save_mean_numpy(tc_cold_3pg_under, 'tc_cold_3pg_under.npy')
+        save_mean_numpy(tc_cold_3pg_innse_away, 'tc_cold_3pg_innse_away.npy')
+        save_mean_numpy(tc_cold_3pg_innse_under, 'tc_cold_3pg_innse_under.npy')
+
+        save_mean_numpy(tc_cold_10pg_away, 'tc_cold_10pg_away.npy')
+        save_mean_numpy(tc_cold_10pg_under, 'tc_cold_10pg_under.npy')
+        save_mean_numpy(tc_cold_10pg_innse_away, 'tc_cold_10pg_innse_away.npy')
+        save_mean_numpy(tc_cold_10pg_innse_under, 'tc_cold_10pg_innse_under.npy')
