@@ -36,18 +36,12 @@ diff_cold_10pg_under = tc_cold_10pg_innse_under - hbi_10pg_innse_under
 
 # --- Plot Stuff --- #
 def plot_measurement(y_data, stream, y_ID):
-    channel_labels = np.repeat(np.arange(10))
-    
     plt.figure(figsize=(10, 5))
     
     x_data  = np.arange(len(diff_data)) # Should come out to 10
     x_ID    = 'ASIC'
     measurement_name = 'TC_HBI_difference'
-    scatter = plt.scatter(x_data, y_data, c=channel_labels, cmap=cmap)
-    
-    cbar = plt.colorbar(scatter, ticks=range(10))
-    cbar.set_label('ABC')
-    cbar.set_ticklabels([f'ABC {i}' for i in range(10)])
+    scatter = plt.scatter(x_data, y_data)
     
     plt.title(f"{serial_num} {measurement_name} {y_ID}, {stream} stream")
     plt.xlabel(f"{x_ID}")
