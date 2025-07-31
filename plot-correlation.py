@@ -53,6 +53,10 @@ def plot_measurement(x_data, y_data, measurement_name, stream, x_ID, y_ID):
 
     plt.savefig(f"{serial_num}-{measurement_name}-{stream}-{x_ID}-vs-{y_ID}.pdf")
 
+plot_measurement(hbi_3pg_innse_away, tc_warm_3pg_innse_away, 'noise', 'away', 'HBI', 'TC_warm')
+plot_measurement(hbi_3pg_innse_under, tc_warm_3pg_innse_under, 'noise', 'under', 'HBI', 'TC_warm')
+plot_measurement(hbi_3pg_innse_away, tc_cold_3pg_innse_away, 'noise', 'away', 'HBI', 'TC_cold')
+plot_measurement(hbi_3pg_innse_under, tc_cold_3pg_innse_under, 'noise', 'under', 'HBI', 'TC_cold')
 plot_measurement(hbi_3pg_away, tc_warm_3pg_away, '3PG', 'away', 'HBI', 'TC_warm')
 plot_measurement(hbi_3pg_under, tc_warm_3pg_under, '3PG', 'under', 'HBI', 'TC_warm')
 plot_measurement(hbi_3pg_away, tc_cold_3pg_away, '3PG', 'away', 'HBI', 'TC_cold')
