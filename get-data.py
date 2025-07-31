@@ -113,13 +113,14 @@ def save_mean_numpy(serial_num, data, name):
 with open("input-config.json") as i_c:
     input_config = json.load(i_c)
     for module in input_config:
+        module_ID = module["module_ID"]
         module_sn = module["module_sn"]
         hybrid_sn = module["hybrid_sn"]
         hbi_dir   = Path(module["hbi_dir"])
         tc_dir    = Path(module["tc_dir"])
         tc_merge  = module["tc_merge"]
 
-        print(f"Acquiring data for {module["module_ID"]}")
+        print(f"Acquiring data for {module_ID}")
 
         tc_name      = 'SN' + hybrid_sn + '*' + tc_sfx
         hbi_name     = 'SN' + hybrid_sn + '*' + hbi_sfx
