@@ -6,22 +6,39 @@ from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 
 # --- Plot Stuff --- #
-def plot_measurement(serial_num, y_data, stream, y_ID):
+def plot_measurement(all_data, stream, y_ID):
     plt.figure(figsize=(10, 5))
     
-    x_data  = np.arange(len(y_data)) # Should come out to 10
-    x_ID    = 'ASIC'
+    x_data = np.arange(len(next(iter(all_data.values()))))
+    x_ID   = 'ASIC'
     measurement_name = 'TC_HBI_difference'
-    scatter = plt.scatter(x_data, y_data)
     
-    plt.title(f"{serial_num} {measurement_name} {y_ID}, {stream} stream")
+    colors = plt.cm.get_cmap("tab10", len(all_data))
+    for idx, (serial_num, y_data) in enumerate(all_data.items()):
+        plt.plot(x_data, y_data, label=serial_num, color=colors(idx), marker='o')
+    
+    plt.title(f"{measurement_name} {y_ID}, {stream} stream")
     plt.xlabel(f"{x_ID}")
     plt.ylabel(f"{y_ID} {measurement_name}")
     plt.grid()
-
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    
     plt.savefig(f"{serial_num}-{measurement_name}-{stream}-{y_ID}.pdf")
+    plt.close()
 
 # --- Plot for Each Serial Number --- #
+data_groups = {
+    ('away', '3pg_warm'): {},
+    ('away', '10pg_warm'): {},
+    ('under', '3pg_warm'): {},
+    ('under', '10pg_warm'): {},
+    ('away', '3pg_cold'): {},
+    ('away', '10pg_cold'): {},
+    ('under', '3pg_cold'): {},
+    ('under', '10pg_cold'): {},
+}
+
 with open("input-config.json") as i_c:
     input_config = json.load(i_c)
     for module in input_config:
@@ -44,23 +61,16 @@ with open("input-config.json") as i_c:
         tc_cold_10pg_innse_under = np.load(f"{module_sn}_tc_cold_10pg_innse_under.npy").mean(axis=1)
 
         # --- Get Differences --- #
-        # --- Since data is passed as NumPy objects, operations can be done directly
-        diff_warm_3pg_away  = tc_warm_3pg_innse_away - hbi_3pg_innse_away
-        diff_warm_10pg_away = tc_warm_10pg_innse_away - hbi_10pg_innse_away
-        diff_warm_3pg_under  = tc_warm_3pg_innse_under - hbi_3pg_innse_under
-        diff_warm_10pg_under = tc_warm_10pg_innse_under - hbi_10pg_innse_under
+        # Since data is passed as NumPy objects, operations can be done directly
+        data_groups[('away', '3pg_warm')][module_sn] = tc_warm_3pg_innse_away - hbi_3pg_innse_away
+        data_groups[('away', '10pg_warm')][module_sn] = tc_warm_10pg_innse_away - hbi_10pg_innse_away
+        data_groups[('under', '3pg_warm')][module_sn] = tc_warm_3pg_innse_under - hbi_3pg_innse_under
+        data_groups[('under', '10pg_warm')][module_sn] = tc_warm_10pg_innse_under - hbi_10pg_innse_under
+        data_groups[('away', '3pg_cold')][module_sn] = tc_cold_3pg_innse_away - hbi_3pg_innse_away
+        data_groups[('away', '10pg_cold')][module_sn] = tc_cold_10pg_innse_away - hbi_10pg_innse_away
+        data_groups[('under', '3pg_cold')][module_sn] = tc_cold_3pg_innse_under - hbi_3pg_innse_under
+        data_groups[('under', '10pg_cold')][module_sn] = tc_cold_10pg_innse_under - hbi_10pg_innse_under
 
-        diff_cold_3pg_away  = tc_cold_3pg_innse_away - hbi_3pg_innse_away
-        diff_cold_10pg_away = tc_cold_10pg_innse_away - hbi_10pg_innse_away
-        diff_cold_3pg_under  = tc_cold_3pg_innse_under - hbi_3pg_innse_under
-        diff_cold_10pg_under = tc_cold_10pg_innse_under - hbi_10pg_innse_under
-
-        plot_measurement(module_sn, diff_warm_3pg_away, 'away', '3pg_warm')
-        plot_measurement(module_sn, diff_warm_10pg_away, 'away', '10pg_warm')
-        plot_measurement(module_sn, diff_warm_3pg_under, 'under', '3pg_warm')
-        plot_measurement(module_sn, diff_warm_10pg_under, 'under', '10pg_warm')
-
-        plot_measurement(module_sn, diff_cold_3pg_away, 'away', '3pg_cold')
-        plot_measurement(module_sn, diff_cold_10pg_away, 'away', '10pg_cold')
-        plot_measurement(module_sn, diff_cold_3pg_under, 'under', '3pg_cold')
-        plot_measurement(module_sn, diff_cold_10pg_under, 'under', '10pg_cold')
+# Now plot each
+for (stream, y_ID), data_dict in data_groups.items():
+    plot_measurement(data_dict, stream, y_ID)
