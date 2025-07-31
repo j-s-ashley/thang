@@ -27,40 +27,40 @@ with open("input-config.json") as i_c:
     for module in input_config:
         module_sn = module["module_sn"]
 
-    # --- Load Data and Get ASIC Mean Values --- #
-    hbi_3pg_innse_away       = np.load(f"{module_sn}_hbi_3pg_innse_away.npy").mean(axis=1)
-    hbi_10pg_innse_away      = np.load(f"{module_sn}_hbi_10pg_innse_away.npy").mean(axis=1)
-    hbi_3pg_innse_under      = np.load(f"{module_sn}_hbi_3pg_innse_under.npy").mean(axis=1)
-    hbi_10pg_innse_under     = np.load(f"{module_sn}_hbi_10pg_innse_under.npy").mean(axis=1)
+        # --- Load Data and Get ASIC Mean Values --- #
+        hbi_3pg_innse_away       = np.load(f"{module_sn}_hbi_3pg_innse_away.npy").mean(axis=1)
+        hbi_10pg_innse_away      = np.load(f"{module_sn}_hbi_10pg_innse_away.npy").mean(axis=1)
+        hbi_3pg_innse_under      = np.load(f"{module_sn}_hbi_3pg_innse_under.npy").mean(axis=1)
+        hbi_10pg_innse_under     = np.load(f"{module_sn}_hbi_10pg_innse_under.npy").mean(axis=1)
 
-    tc_warm_3pg_innse_away   = np.load(f"{module_sn}_tc_warm_3pg_innse_away.npy").mean(axis=1)
-    tc_warm_10pg_innse_away  = np.load(f"{module_sn}_tc_warm_10pg_innse_away.npy").mean(axis=1)
-    tc_warm_3pg_innse_under  = np.load(f"{module_sn}_tc_warm_3pg_innse_under.npy").mean(axis=1)
-    tc_warm_10pg_innse_under = np.load(f"{module_sn}_tc_warm_10pg_innse_under.npy").mean(axis=1)
+        tc_warm_3pg_innse_away   = np.load(f"{module_sn}_tc_warm_3pg_innse_away.npy").mean(axis=1)
+        tc_warm_10pg_innse_away  = np.load(f"{module_sn}_tc_warm_10pg_innse_away.npy").mean(axis=1)
+        tc_warm_3pg_innse_under  = np.load(f"{module_sn}_tc_warm_3pg_innse_under.npy").mean(axis=1)
+        tc_warm_10pg_innse_under = np.load(f"{module_sn}_tc_warm_10pg_innse_under.npy").mean(axis=1)
 
-    tc_cold_3pg_innse_away   = np.load(f"{module_sn}_tc_cold_3pg_innse_away.npy").mean(axis=1)
-    tc_cold_10pg_innse_away  = np.load(f"{module_sn}_tc_cold_10pg_innse_away.npy").mean(axis=1)
-    tc_cold_3pg_innse_under  = np.load(f"{module_sn}_tc_cold_3pg_innse_under.npy").mean(axis=1)
-    tc_cold_10pg_innse_under = np.load(f"{module_sn}_tc_cold_10pg_innse_under.npy").mean(axis=1)
+        tc_cold_3pg_innse_away   = np.load(f"{module_sn}_tc_cold_3pg_innse_away.npy").mean(axis=1)
+        tc_cold_10pg_innse_away  = np.load(f"{module_sn}_tc_cold_10pg_innse_away.npy").mean(axis=1)
+        tc_cold_3pg_innse_under  = np.load(f"{module_sn}_tc_cold_3pg_innse_under.npy").mean(axis=1)
+        tc_cold_10pg_innse_under = np.load(f"{module_sn}_tc_cold_10pg_innse_under.npy").mean(axis=1)
 
-    # --- Get Differences --- #
-    # --- Since data is passed as NumPy objects, operations can be done directly
-    diff_warm_3pg_away  = tc_warm_3pg_innse_away - hbi_3pg_innse_away
-    diff_warm_10pg_away = tc_warm_10pg_innse_away - hbi_10pg_innse_away
-    diff_warm_3pg_under  = tc_warm_3pg_innse_under - hbi_3pg_innse_under
-    diff_warm_10pg_under = tc_warm_10pg_innse_under - hbi_10pg_innse_under
+        # --- Get Differences --- #
+        # --- Since data is passed as NumPy objects, operations can be done directly
+        diff_warm_3pg_away  = tc_warm_3pg_innse_away - hbi_3pg_innse_away
+        diff_warm_10pg_away = tc_warm_10pg_innse_away - hbi_10pg_innse_away
+        diff_warm_3pg_under  = tc_warm_3pg_innse_under - hbi_3pg_innse_under
+        diff_warm_10pg_under = tc_warm_10pg_innse_under - hbi_10pg_innse_under
 
-    diff_cold_3pg_away  = tc_cold_3pg_innse_away - hbi_3pg_innse_away
-    diff_cold_10pg_away = tc_cold_10pg_innse_away - hbi_10pg_innse_away
-    diff_cold_3pg_under  = tc_cold_3pg_innse_under - hbi_3pg_innse_under
-    diff_cold_10pg_under = tc_cold_10pg_innse_under - hbi_10pg_innse_under
+        diff_cold_3pg_away  = tc_cold_3pg_innse_away - hbi_3pg_innse_away
+        diff_cold_10pg_away = tc_cold_10pg_innse_away - hbi_10pg_innse_away
+        diff_cold_3pg_under  = tc_cold_3pg_innse_under - hbi_3pg_innse_under
+        diff_cold_10pg_under = tc_cold_10pg_innse_under - hbi_10pg_innse_under
 
-    plot_measurement(module_sn, diff_warm_3pg_away, 'away', '3pg_warm')
-    plot_measurement(module_sn, diff_warm_10pg_away, 'away', '10pg_warm')
-    plot_measurement(module_sn, diff_warm_3pg_under, 'under', '3pg_warm')
-    plot_measurement(module_sn, diff_warm_10pg_under, 'under', '10pg_warm')
+        plot_measurement(module_sn, diff_warm_3pg_away, 'away', '3pg_warm')
+        plot_measurement(module_sn, diff_warm_10pg_away, 'away', '10pg_warm')
+        plot_measurement(module_sn, diff_warm_3pg_under, 'under', '3pg_warm')
+        plot_measurement(module_sn, diff_warm_10pg_under, 'under', '10pg_warm')
 
-    plot_measurement(module_sn, diff_cold_3pg_away, 'away', '3pg_cold')
-    plot_measurement(module_sn, diff_cold_10pg_away, 'away', '10pg_cold')
-    plot_measurement(module_sn, diff_cold_3pg_under, 'under', '3pg_cold')
-    plot_measurement(module_sn, diff_cold_10pg_under, 'under', '10pg_cold')
+        plot_measurement(module_sn, diff_cold_3pg_away, 'away', '3pg_cold')
+        plot_measurement(module_sn, diff_cold_10pg_away, 'away', '10pg_cold')
+        plot_measurement(module_sn, diff_cold_3pg_under, 'under', '3pg_cold')
+        plot_measurement(module_sn, diff_cold_10pg_under, 'under', '10pg_cold')
