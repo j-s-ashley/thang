@@ -21,6 +21,7 @@ def plot_measurement(all_data, stream, y_ID):
     plt.xlabel(f"{x_ID}")
     plt.ylabel(f"{y_ID} {measurement_name}")
     plt.grid()
+    plt.xticks(x_data)
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
     
