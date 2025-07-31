@@ -103,10 +103,11 @@ def get_measurements(sorted_files):
     return gain_away, gain_under, innse_away, innse_under
 
 # --- Get Mean and Save Data --- #
-def save_mean_numpy(data, name):
+def save_mean_numpy(serial_num, data, name):
     numpy_object = np.array(data)
     mean_data    = numpy_object.mean(axis=0)
-    np.save(name, mean_data)
+    full_name    = serial_num + name
+    np.save(full_name, mean_data)
 
 # --- Open Input JSON, Loop Over Modules--- #
 with open("input-config.json") as i_c:
@@ -144,34 +145,34 @@ with open("input-config.json") as i_c:
         tc_cold_10pg_away, tc_cold_10pg_under, tc_cold_10pg_innse_away, tc_cold_10pg_innse_under = get_measurements(tc_cold_10pg)
 
         # Save HBI means
-        save_mean_numpy(hbi_3pg_away, 'hbi_3pg_away.npy')
-        save_mean_numpy(hbi_3pg_under, 'hbi_3pg_under.npy')
-        save_mean_numpy(hbi_3pg_innse_away, 'hbi_3pg_innse_away.npy')
-        save_mean_numpy(hbi_3pg_innse_under, 'hbi_3pg_innse_under.npy')
+        save_mean_numpy(module_sn, hbi_3pg_away, 'hbi_3pg_away.npy')
+        save_mean_numpy(module_sn, hbi_3pg_under, 'hbi_3pg_under.npy')
+        save_mean_numpy(module_sn, hbi_3pg_innse_away, 'hbi_3pg_innse_away.npy')
+        save_mean_numpy(module_sn, hbi_3pg_innse_under, 'hbi_3pg_innse_under.npy')
 
-        save_mean_numpy(hbi_10pg_away, 'hbi_10pg_away.npy')
-        save_mean_numpy(hbi_10pg_under, 'hbi_10pg_under.npy')
-        save_mean_numpy(hbi_10pg_innse_away, 'hbi_10pg_innse_away.npy')
-        save_mean_numpy(hbi_10pg_innse_under, 'hbi_10pg_innse_under.npy')
+        save_mean_numpy(module_sn, hbi_10pg_away, 'hbi_10pg_away.npy')
+        save_mean_numpy(module_sn, hbi_10pg_under, 'hbi_10pg_under.npy')
+        save_mean_numpy(module_sn, hbi_10pg_innse_away, 'hbi_10pg_innse_away.npy')
+        save_mean_numpy(module_sn, hbi_10pg_innse_under, 'hbi_10pg_innse_under.npy')
 
         # Save TC (warm) means
-        save_mean_numpy(tc_warm_3pg_away, 'tc_warm_3pg_away.npy')
-        save_mean_numpy(tc_warm_3pg_under, 'tc_warm_3pg_under.npy')
-        save_mean_numpy(tc_warm_3pg_innse_away, 'tc_warm_3pg_innse_away.npy')
-        save_mean_numpy(tc_warm_3pg_innse_under, 'tc_warm_3pg_innse_under.npy')
+        save_mean_numpy(module_sn, tc_warm_3pg_away, 'tc_warm_3pg_away.npy')
+        save_mean_numpy(module_sn, tc_warm_3pg_under, 'tc_warm_3pg_under.npy')
+        save_mean_numpy(module_sn, tc_warm_3pg_innse_away, 'tc_warm_3pg_innse_away.npy')
+        save_mean_numpy(module_sn, tc_warm_3pg_innse_under, 'tc_warm_3pg_innse_under.npy')
 
-        save_mean_numpy(tc_warm_10pg_away, 'tc_warm_10pg_away.npy')
-        save_mean_numpy(tc_warm_10pg_under, 'tc_warm_10pg_under.npy')
-        save_mean_numpy(tc_warm_10pg_innse_away, 'tc_warm_10pg_innse_away.npy')
-        save_mean_numpy(tc_warm_10pg_innse_under, 'tc_warm_10pg_innse_under.npy')
+        save_mean_numpy(module_sn, tc_warm_10pg_away, 'tc_warm_10pg_away.npy')
+        save_mean_numpy(module_sn, tc_warm_10pg_under, 'tc_warm_10pg_under.npy')
+        save_mean_numpy(module_sn, tc_warm_10pg_innse_away, 'tc_warm_10pg_innse_away.npy')
+        save_mean_numpy(module_sn, tc_warm_10pg_innse_under, 'tc_warm_10pg_innse_under.npy')
 
         # Save TC (cold) means
-        save_mean_numpy(tc_cold_3pg_away, 'tc_cold_3pg_away.npy')
-        save_mean_numpy(tc_cold_3pg_under, 'tc_cold_3pg_under.npy')
-        save_mean_numpy(tc_cold_3pg_innse_away, 'tc_cold_3pg_innse_away.npy')
-        save_mean_numpy(tc_cold_3pg_innse_under, 'tc_cold_3pg_innse_under.npy')
+        save_mean_numpy(module_sn, tc_cold_3pg_away, 'tc_cold_3pg_away.npy')
+        save_mean_numpy(module_sn, tc_cold_3pg_under, 'tc_cold_3pg_under.npy')
+        save_mean_numpy(module_sn, tc_cold_3pg_innse_away, 'tc_cold_3pg_innse_away.npy')
+        save_mean_numpy(module_sn, tc_cold_3pg_innse_under, 'tc_cold_3pg_innse_under.npy')
 
-        save_mean_numpy(tc_cold_10pg_away, 'tc_cold_10pg_away.npy')
-        save_mean_numpy(tc_cold_10pg_under, 'tc_cold_10pg_under.npy')
-        save_mean_numpy(tc_cold_10pg_innse_away, 'tc_cold_10pg_innse_away.npy')
-        save_mean_numpy(tc_cold_10pg_innse_under, 'tc_cold_10pg_innse_under.npy')
+        save_mean_numpy(module_sn, tc_cold_10pg_away, 'tc_cold_10pg_away.npy')
+        save_mean_numpy(module_sn, tc_cold_10pg_under, 'tc_cold_10pg_under.npy')
+        save_mean_numpy(module_sn, tc_cold_10pg_innse_away, 'tc_cold_10pg_innse_away.npy')
+        save_mean_numpy(module_sn, tc_cold_10pg_innse_under, 'tc_cold_10pg_innse_under.npy')
