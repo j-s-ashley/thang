@@ -106,7 +106,7 @@ def get_measurements(sorted_files):
 def save_mean_numpy(serial_num, data, name):
     numpy_object = np.array(data)
     mean_data    = numpy_object.mean(axis=0)
-    full_name    = serial_num + name
+    full_name    = serial_num + '_' + name
     np.save(full_name, mean_data)
 
 # --- Open Input JSON, Loop Over Modules--- #
