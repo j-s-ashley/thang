@@ -38,7 +38,7 @@ diff_cold_10pg_under = tc_cold_10pg_innse_under - hbi_10pg_innse_under
 def plot_measurement(y_data, stream, y_ID):
     plt.figure(figsize=(10, 5))
     
-    x_data  = np.arange(len(diff_data)) # Should come out to 10
+    x_data  = np.arange(len(y_data)) # Should come out to 10
     x_ID    = 'ASIC'
     measurement_name = 'TC_HBI_difference'
     scatter = plt.scatter(x_data, y_data)
