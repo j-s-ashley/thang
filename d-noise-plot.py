@@ -13,7 +13,7 @@ def plot_measurement(all_data, stream, y_ID):
     x_ID   = 'ASIC'
     measurement_name = 'TC_HBI_difference'
     
-    colors = plt.cm.get_cmap("tab10", len(all_data))
+    cmap = plt.cm.get_cmap("tab10", len(all_data))
     for idx, (serial_num, y_data) in enumerate(all_data.items()):
         plt.scatter(x_data, y_data, label=serial_num, color=cmap(idx))
     
