@@ -15,7 +15,7 @@ def get_rms(data):
 def plot_measurement(all_data, stream, y_ID):
     plt.figure(figsize=(10, 5))
     
-    x_data = np.arange(len(next(iter(all_data.values()))))
+    x_data = np.arange(len(next(iter(all_data.values()))[0]))  # x for each ASIC
     x_ID   = 'ASIC'
     measurement_name = 'median-3pg-noise-per-ASIC'
     
