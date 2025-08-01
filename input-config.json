@@ -32,14 +32,6 @@
         "tc_merge": "/opt/local/strips/ITk/data/20250716_LBNL_PS_LS66_LS145_LS146_LS157/merged_results/SN20USBML1236277_20250716_3_MODULE_TC.json"
         },
         {
-	"module_ID": "LS158",
-        "module_sn": "20USBML1236282",
-        "hybrid_sn": "20USBHX2002813",
-        "hbi_dir": "inputs/LS156-158/hbi",
-        "tc_dir": "/opt/local/strips/ITk/data/20250717_LBNL_PS_LS147_LS158_LS159_LS163/results",
-        "tc_merge": "/opt/local/strips/ITk/data/20250717_LBNL_PS_LS147_LS158_LS159_LS163/merged_results/SN20USBML1236282_20250717_5_MODULE_TC.json"
-        },
-        {
 	"module_ID": "LS160",
         "module_sn": "20USBML1236284",
         "hybrid_sn": "20USBHX2002722",
