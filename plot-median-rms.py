@@ -63,27 +63,27 @@ with open("input-config.json") as i_c:
         # --- Store Median and RMS of Data --- #
         # Since data is passed as NumPy objects, operations can be done directly
         data_groups[('away', 'hbi')][module_sn] = (
-            np.median(hbi_3pg_innse_away),
+            np.median(hbi_3pg_innse_away, axis=1),
             get_rms(hbi_3pg_innse_away)
         )
         data_groups[('under', 'hbi')][module_sn] = (
-            np.median(hbi_3pg_innse_under),
+            np.median(hbi_3pg_innse_under, axis=1),
             get_rms(hbi_3pg_innse_under)
         )
         data_groups[('away', 'tc_warm')][module_sn] = (
-            np.median(tc_warm_3pg_innse_away),
+            np.median(tc_warm_3pg_innse_away, axis=1),
             get_rms(tc_warm_3pg_innse_away)
         )
         data_groups[('under', 'tc_warm')][module_sn] = (
-            np.median(tc_warm_3pg_innse_under),
+            np.median(tc_warm_3pg_innse_under, axis=1),
             get_rms(tc_warm_3pg_innse_under)
         )
         data_groups[('away', 'tc_cold')][module_sn] = (
-            np.median(tc_cold_3pg_innse_away),
+            np.median(tc_cold_3pg_innse_away, axis=1),
             get_rms(tc_cold_3pg_innse_away)
         )
         data_groups[('under', 'tc_cold')][module_sn] = (
-            np.median(tc_cold_3pg_innse_under),
+            np.median(tc_cold_3pg_innse_under, axis=1),
             get_rms(tc_cold_3pg_innse_under)
         )
 
