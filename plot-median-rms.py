@@ -7,9 +7,7 @@ from matplotlib.colors import Normalize
 
 # --- Get RMS --- #
 def get_rms(data):
-    s = data**2
-    ms = s.mean(axis=1) # mean per ASIC
-    rms = np.sqrt(ms)
+    rms = np.sqrt(np.mean(np.square(data), axis=1))
     return rms
 
 # --- Plot Stuff --- #
