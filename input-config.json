@@ -1,5 +1,37 @@
 [
         {
+	"module_ID": "LS172",
+        "module_sn": "20USBML1236347",
+        "hybrid_sn": "20USBHX2003066",
+        "hbi_dir": "inputs/LS/hbi",
+        "tc_dir": "/opt/local/strips/ITk/data/20250728_LBNL_PS_LS172_LS173_LS174_LS176/results",
+        "tc_merge": "/opt/local/strips/ITk/data/20250728_LBNL_PS_LS172_LS173_LS174_LS176/merged_results/SN20USBML1236347_20250728_7_MODULE_TC.json"
+        },
+        {
+	"module_ID": "LS176",
+        "module_sn": "20USBML1236367",
+        "hybrid_sn": "20USBHX2003118",
+        "hbi_dir": "inputs/LS/hbi",
+        "tc_dir": "/opt/local/strips/ITk/data/20250728_LBNL_PS_LS172_LS173_LS174_LS176/results",
+        "tc_merge": "/opt/local/strips/ITk/data/20250728_LBNL_PS_LS172_LS173_LS174_LS176/merged_results/SN20USBML1236367_20250728_7_MODULE_TC.json"
+        },
+        {
+	"module_ID": "LS143",
+        "module_sn": "20USBML1236186",
+        "hybrid_sn": "20USBHX2002817",
+        "hbi_dir": "inputs/LS/hbi",
+        "tc_dir": "/opt/local/strips/ITk/data/20250708_LBNL_LS119_LS120_LS143_LS149/results",
+        "tc_merge": "/opt/local/strips/ITk/data/20250708_LBNL_LS119_LS120_LS143_LS149/merged_results/SN20USBML1236186_20250708_4_MODULE_TC.json"
+        },
+        {
+	"module_ID": "LS149",
+        "module_sn": "20USBML1236187",
+        "hybrid_sn": "20USBHX2002818",
+        "hbi_dir": "inputs/LS149/hbi",
+        "tc_dir": "/opt/local/strips/ITk/data/20250708_LBNL_LS119_LS120_LS143_LS149/results",
+        "tc_merge": "/opt/local/strips/ITk/data/20250708_LBNL_LS119_LS120_LS143_LS149/merged_results/SN20USBML1236187_20250708_4_MODULE_TC.json"
+        },
+        {
 	"module_ID": "LS153",
         "module_sn": "20USBML1236274",
         "hybrid_sn": "20USBHX2002884",
