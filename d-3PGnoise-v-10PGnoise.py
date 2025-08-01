@@ -27,13 +27,11 @@ def plot_measurement(x_data, y_data, measurement_name, stream, x_ID, y_ID):
 
 # --- Plot for Each Serial Number --- #
 data_groups = {
-    ('away', 'hbi_warm'): {},
+    ('away', 'hbi'): {},
+    ('under', 'hbi'): {},
     ('away', 'tc_warm'): {},
-    ('under', 'hbi_warm'): {},
     ('under', 'tc_warm'): {},
-    ('away', 'hbi_cold'): {},
     ('away', 'tc_cold'): {},
-    ('under', 'hbi_cold'): {},
     ('under', 'tc_cold'): {},
 }
 
