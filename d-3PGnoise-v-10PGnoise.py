@@ -6,24 +6,27 @@ from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 
 # --- Plot Stuff --- #
-def plot_measurement(x_data, y_data, measurement_name, stream, x_ID, y_ID):
-    channel_labels = np.repeat(np.arange(10), 128)
-    cmap           = plt.cm.get_cmap("tab10")
-    
+def plot_measurement(all_data, stream, y_ID):
     plt.figure(figsize=(10, 5)) 
-
-    scatter = plt.scatter(x_data, y_data, c=channel_labels, cmap=cmap)
     
-    cbar = plt.colorbar(scatter, ticks=range(10))
-    cbar.set_label('ABC')
-    cbar.set_ticklabels([f'ABC {i}' for i in range(10)])
+    x_data = np.arange(len(next(iter(all_data.values()))))
+    x_ID   = 'ASIC'
+    measurement_name = 'TC_HBI_difference'
     
-    plt.title(f"{serial_num} {measurement_name}, {stream} stream, {x_ID} vs {y_ID}")
-    plt.xlabel(f"{x_ID} {measurement_name}")
+    cmap = plt.cm.get_cmap("tab10", len(all_data))
+    for idx, (serial_num, y_data) in enumerate(all_data.items()):
+        plt.scatter(x_data, y_data, label=serial_num, color=cmap(idx))
+    
+    plt.title(f"{measurement_name} {y_ID}, {stream} stream")
+    plt.xlabel(f"{x_ID}")
     plt.ylabel(f"{y_ID} {measurement_name}")
     plt.grid()
-
-    plt.savefig(f"{serial_num}-{measurement_name}-{stream}-{x_ID}-vs-{y_ID}.pdf")
+    plt.xticks(x_data)
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    
+    plt.savefig(f"all-{measurement_name}-{stream}-{y_ID}.pdf")
+    plt.close()
 
 # --- Plot for Each Serial Number --- #
 data_groups = {
