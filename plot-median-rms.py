@@ -6,8 +6,9 @@ from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 
 # --- Get RMS --- #
-def get_rms(data):
-    rms = np.sqrt(np.mean(np.square(data), axis=1))
+def get_rms_from_median(data):
+    median = np.median(data, axis=1, keepdims=True)
+    rms = np.sqrt(np.mean(np.square(data - median), axis=1))
     return rms
 
 # --- Plot Stuff --- #
