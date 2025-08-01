@@ -19,7 +19,7 @@ def plot_measurement(all_data, stream, y_ID):
     x_ID   = 'ASIC'
     measurement_name = 'median-3pg-noise-per-ASIC'
     
-    cmap = plt.cm.get_cmap("tab10", len(all_data))
+    cmap = plt.colormaps.get_cmap("tab10").resampled(len(all_data))
     for idx, (serial_num, (y_median, y_rms)) in enumerate(all_data.items()):
         plt.errorbar(
             x_data, y_median, yerr=y_rms, fmt='o', label=serial_num,
