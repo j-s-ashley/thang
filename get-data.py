@@ -105,7 +105,7 @@ def get_measurements(sorted_files):
 # --- Get Mean and Save Data --- #
 def save_mean_numpy(serial_num, data, name):
     numpy_object = np.array(data)
-    mean_data    = numpy_object.mean(axis=0)
+    mean_data    = numpy_object.mean(axis=0) # mean per channel
     full_name    = serial_num + '_' + name
     np.save(full_name, mean_data)
 
